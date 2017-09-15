@@ -1,0 +1,79 @@
+# -----------------------------------------------------------------
+# .gitignore para Docker
+# -----------------------------------------------------------------
+
+# ignora tudo no diretório "htdocs", exceto:
+htdocs/*
+!htdocs/api.dev
+htdocs/api.dev/*
+!htdocs/api.dev/public
+htdocs/api.dev/public/*
+!htdocs/50x.html
+!htdocs/index.html
+!htdocs/index.php
+!htdocs/bd.php
+!htdocs/api.dev/public/50x.html
+!htdocs/api.dev/public/index.html
+!htdocs/api.dev/public/index.php
+!htdocs/api.dev/public/bd.php
+
+# ignora tudo no diretório "mysql/data"
+mysql/data/
+
+# ignora tudo no diretório "nginx/logs"
+nginx/logs/
+
+# ignora tudo no diretório "nginx/sites", exceto:
+nginx/sites/*
+!nginx/sites/default.conf
+!nginx/sites/api.dev.conf
+
+# ignora todos os arquivos iniciados com .
+.*
+
+# rastreia o arquivo .gitignore (Não ignorar isso)
+!.gitignore
+
+# rastreia o arquivo .editorconfig (Não ignorar isso)
+!.editorconfig
+
+# rastreia o arquivo readme.md (Não ignorar isso)
+!readme.md
+
+# ignora todos os arquivos que começam com ~
+~*
+
+# ignora arquivos gerados pelo sistema operacional
+ehthumbs.db
+Thumbs.db
+
+# ignora arquivos de Editores
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.idea
+
+# ignora arquivos de log e banco de dados
+*.log
+*.sql
+*.sqlite
+
+# ignora arquivos compilados
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignora arquivos de pacote
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+.DS_Store

@@ -1,0 +1,72 @@
+version: '3'
+services:
+    nginx:
+        container_name: nginx
+        restart: always
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        volumes:
+            - ${APPLICATION}:/var/www/html
+            - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
+            - ${NGINX_SITES_PATH}:/etc/nginx/conf.d
+        ports:
+            - "${NGINX_HOST_HTTP_PORT}:80"
+            - "${NGINX_HOST_HTTPS_PORT}:443"
+        links:
+            - php-fpm
+        networks:
+            - code-network
+
+    php-fpm:
+        container_name: php-fpm
+        restart: always
+        build:
+            context: ./php-fpm
+            args:
+                - INSTALL_GD=${PHP_FPM_INSTALL_GD}
+                - INSTALL_COMPRESSION=${PHP_FPM_INSTALL_COMPRESSION}
+                - INSTALL_FTP=${PHP_FPM_INSTALL_FTP}
+                - INSTALL_MBSTRING=${PHP_FPM_INSTALL_MBSTRING}
+                - INSTALL_MCRYPT=${PHP_FPM_INSTALL_MCRYPT}
+                - INSTALL_PDO_MYSQL=${PHP_FPM_INSTALL_PDO_MYSQL}
+                - INSTALL_PDO_POSTGRESQL=${PHP_FPM_INSTALL_PDO_POSTGRESQL}
+                - INSTALL_MYSQLI=${PHP_FPM_INSTALL_MYSQLI}
+                - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
+                - INSTALL_OPCACHE=${PHP_FPM_INSTALL_OPCACHE}
+                - INSTALL_INTL=${PHP_FPM_INSTALL_INTL}
+                - INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
+                - INSTALL_TOKENIZER=${PHP_FPM_INSTALL_TOKENIZER}
+                - INSTALL_JSON_XML=${PHP_FPM_INSTALL_JSON_XML}
+                - INSTALL_CURL=${PHP_FPM_INSTALL_CURL}
+                - INSTALL_OPENSSL=${PHP_FPM_INSTALL_OPENSSL}
+                - INSTALL_COMPOSER=${PHP_FPM_INSTALL_COMPOSER}
+            dockerfile: Dockerfile
+        expose:
+            - "9000"    
+        volumes:
+            - ${APPLICATION}:/var/www/html
+        networks:
+            - code-network
+
+    mysql:
+        container_name: mysql
+        restart: always
+        build:
+            context: ./mysql
+            dockerfile: Dockerfile
+        ports:
+            - "${MYSQL_PORT}:3306"
+        volumes:
+            - ${MYSQL_DATA}:/var/lib/mysql
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        networks:
+            - code-network
+
+networks:
+    code-network:
+        driver: bridge
