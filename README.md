@@ -60,9 +60,9 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 
 1. Clone o repositório usando o comando:
 
-   git clone https://github.com/danielnogueira-dev/Docker-Compose-Nginx-Php
+   git clone https://github.com/danielnogueira-dev/Docker-Compose-Nginx-Php-Mysql
 
-2. Entre na pasta Docker-Compose-Nginx-Php e copie o arquivo env-example para .env.
+2. Entre na pasta Docker-Compose-Nginx-Php-Mysql e copie o arquivo env-example para .env.
 
    cp env-example .env
 
