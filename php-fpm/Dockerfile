@@ -1,4 +1,4 @@
-FROM php:7.1.9-fpm
+FROM php:7.2-fpm
  
 MAINTAINER Daniel Nogueira <danielnogueira.dev@gmail.com>
 
